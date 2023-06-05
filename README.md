@@ -4,13 +4,16 @@
 ### Two Sentence Description    
 This project uses a Variational Auto Encoder model and a custom built dataset (built on work listed further in the Readme) of human-created Dungeons and Dragons characters to create an NPC (Non-Playable Character) generator to be used by Dungeons and Dragons DMs in a pinch.  
 
-### Important Links
+#### Important Links
 - Demonstration video:
-- Notebook containing model:
+- Notebook containing model:     
 
+
+#### Other Links         
 - Link to original Dataset:
 - Custom created Dataset:
 - Ground Truth Sheet:
+- Normalised Dataset Used in Model:
 
 # Project and Process Documentation
 
