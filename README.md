@@ -1,5 +1,5 @@
 # D&D NPC Generator (using an Variational Auto-Encoder)
-Advait Ukidve - June 2023 - MSc. Creative Computing at UAL CCI
+<sub> Advait Ukidve - June 2023 - MSc. Creative Computing at UAL CCI </sub>
 
 ## Two Sentence Description    
 This project uses a Variational Auto Encoder model and a custom built dataset (built on work listed further in the Readme) of human-created Dungeons and Dragons characters to create an NPC (Non-Playable Character) generator to be used by Dungeons and Dragons DMs in a pinch.  
