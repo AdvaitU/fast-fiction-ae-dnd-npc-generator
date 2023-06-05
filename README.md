@@ -27,6 +27,7 @@ The aims of the project were, hence, to create an NPC generator that:
 3. Ensures the jumping off points are not completely random and work with each other cohesively. For example, having a '7 foot gnome mage wearing chainmail' makes very little sense but could also be compelling. A healthy mix of traits that work with each other like '3-5ft height for a gnome' and 'light armour/robes for a mage', with sometimes-absurd randomness mixed in would achieve this. This would be driven by a dataset 
 4. Builds NPCs similar to Player Characters created by humans so they make for good storytelling at a granular level.
 
+## Process
 
 ### Getting The Dataset
 - In order to build a dataset that qualified Aim 3 listed above, I needed a large set of characters with traits that made sense, then edited to add a little randomness (perhaps in a 90-10 or 95-5 weight distribution of 'makes sense' vs. 'absurd but funny'. 
@@ -45,6 +46,7 @@ The aims of the project were, hence, to create an NPC generator that:
 
 ### Visualising the Embedded Space
 
+## Evaluating
 ### Limitations of the Project
 
 ### Evaluating the Project
