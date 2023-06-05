@@ -22,5 +22,29 @@ For eg: if I wanted to create characters quickly to fill out an alchemy shop's i
 
 ### Aim
 The aims of the project were, hence, to create an NPC generator that:
-1. Afford generation guided by pre-decided characteristic by mapping out the model's embedded space and movement required to get the kind of character one wants.
-2. 
+1. Affords generation guided by pre-decided characteristic by mapping out the model's embedded space and movement required to get the kind of character one wants.
+2. Provides a large number and variety of jumping-off points to build a character that the DM can then choose from according to their discretion.
+3. Ensures the jumping off points are not completely random and work with each other cohesively. For example, having a '7 foot gnome mage wearing chainmail' makes very little sense but could also be compelling. A healthy mix of traits that work with each other like '3-5ft height for a gnome' and 'light armour/robes for a mage', with sometimes-absurd randomness mixed in would achieve this. This would be driven by a dataset 
+4. Builds NPCs similar to Player Characters created by humans so they make for good storytelling at a granular level.
+
+
+### Getting The Dataset
+- In order to build a dataset that qualified Aim 3 listed above, I needed a large set of characters with traits that made sense, then edited to add a little randomness (perhaps in a 90-10 or 95-5 weight distribution of 'makes sense' vs. 'absurd but funny'. 
+- I also needed a data set that already contained the quantitative measures of an NPC - traits that do not afford randomness per the rules of the game - based preferably on human-created characters.
+- Fortunately, I found a dataset that qualified 60% of my requirements - [This one right here]
+
+### Building on the Dataset
+
+### How do the traits fit into an auto-encoder?
+#### Race
+#### Race
+
+### Building the Model
+
+### The Results
+
+### Visualising the Embedded Space
+
+### Limitations of the Project
+
+### Evaluating the Project
