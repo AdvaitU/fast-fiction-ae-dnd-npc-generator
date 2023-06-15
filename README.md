@@ -68,7 +68,7 @@ Traits such as race, class, background, etc. have a finite number of possibiliti
 These might have, in retrospect, been better off to perform one-hot encoding on. But given the time and the sheer scale, I chose integer encoding instead. This remains a limitation of the project - one that I aim to fix after the dust is settled.   
 
 #### Multiples-of
-Certain traits such as height, weight, and speed are in the format 'multiple-of'. These traits are tied intrinsicly to another one of the character's traits (for eg: height of a character can be given by the average height of the race the character belongs to). For these, I used float values between 0.5 and 1.5 as the trait. The decimal points can be multiplied with the average height of the character's race to calculate the character's height in inches.
+Certain traits such as height, weight, and speed are in the format 'multiple-of'. These traits are tied intrinsically to another one of the character's traits (for eg: height of a character can be given by the average height of the race the character belongs to). For these, I used float values between 0.5 and 1.5 as the trait. The decimal points can be multiplied with the average height of the character's race to calculate the character's height in inches.
 
 #### One-hot Encoding
 Some other features which are smaller in scope of possibilities such as the alignment of a character that can be given by two values - intention (good, evil, neutral) and method (chaotic, lawful, neutral) use one-hot encoding.
@@ -80,13 +80,50 @@ Traits such as the kind of weapon a character carries of the armour they wear ca
 
 # The Model
 
-I have documented the model training process in the same order as [the notebook](./Fast%Fiction%Notebook.ipynb) - with section numbers aligning with those in the notebook. This documentation explains key details and decisions while providing relevant screenshots without getting into any of the code I used. Please refer to the notebook for specific instances of the code.
+I have documented the model training process in the same order as [the notebook](./FastFiction-Notebook.ipynb) - with section numbers aligning with those in the notebook. This documentation explains key details and decisions while providing relevant screenshots without getting into any of the code I used. Please refer to the notebook for specific instances of the code.
 
-### The Results
+### 1. The Data
+- First the data is imported as a pandas dataframe called 'df' and split into x_train and x_test dataset in a 80-20 ratio. (Thanks to the [technique](https://stackoverflow.com/questions/24147278/how-do-i-create-test-and-train-samples-from-one-dataframe-with-pandas) I found on StackOverflow).
+- The CSV dataset contains 10,894 rows and 31 columns.
+- x_train hence has the shape (8715,31) and x_test has the shape (2719,31).
+- No y_train and y_test were needed as the model is an autoencoder with the target being the same as the original dataset.
 
-### Visualising the Embedded Space
+### 2. The Model 
 
-## Evaluating
+- I chose to use an auto-encoder for the purpose. The auto-encoder is built using a separate encoder and decoder trained together.
+- Both the Encoder and Decoder 9-10 connected layers with the majority being fully connected dense layers and an Input, BatchNormalisation and RELU Activation layer each.
+- The encoder takes the shape (n,31) as an input and passes it through increasingly smaller layers 3x(n,31), 2x(n,15), 2x(n,7), 1x(n,3). The decoder works in the exact opposite fashion.
+- The latent vector is of the shape (n,3) having 3 dimensions which make it easy to visualise the embedded space. I also tried reducing the dimensionality to 1, 2, and 4 but had similar results in terms of loss.
+
+<img src="./Images/1.png" width = 1000px>   
+<sub> Diagram of the Autoencoder model (Representational) </sub>  
+
+- The model uses the optimiser 'adam'. I tried using multiple optimisers but 'adam' proved to be the most reliable.
+- It uses 'mse' loss function to calculate loss as the target data is not all categorical or binary.
+- I trained the model with a batch size of 32 for 500 epochs.
+
+## 3. Evaluating the Model
+
+- The model performed pretty well during the training with the loss consistently below 0.1.
+
+<img src="./Images/1.png" width = 500px align = center>   
+<sub> Graph showing loss and val_loss over 500 epochs </sub>  
+
+- In order to evaluate the model further, I ran the test data through the aut-encoder and plotted the original and reconstructed vectors in a line graph.
+- The reconstructed vectors weren't very accurate but followed the general pattern of the original vectors.   
+
+<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   
+<sub> Line Diagrams showing the original vectors and reconstructed vectors from (left) the training set and (right) the testing set </sub>  
+
+- Next, I plotted the embedded space by creating a 3D scatter diagram of the latent vectors created by encoding the training set. (Thanks to [this tutorial](https://www.geeksforgeeks.org/3d-scatter-plotting-in-python-using-matplotlib/ for teaching me how to do 3D scatter Plots with Matplotlib))
+- Here, I first encountered the problem with this project I explain in detail at the end - that every time the model trained, it trained differently - often losing accuracy in reconstructing specific columns of data.
+- Here is an array of interesting looking but indicative 3D scatters I got after training the model multiple times:   
+
+<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>    <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   
+<sub> Visualisations of the embedded space as a 3D scatter plot </sub>  
+
+
+
+## Evaluating the Project
 ### Limitations of the Project
-
-### Evaluating the Project
+### Future Scope
