@@ -80,7 +80,7 @@ Traits such as the kind of weapon a character carries of the armour they wear ca
 
 # The Model
 
-I have documented the model training process in the same order as [the notebook](./Fast Fiction Notebook.ipynb) - with section numbers aligning with those in the notebook. This documentation explains key details and decisions while providing relevant screenshots without getting into any of the code I used. Please refer to the notebook for specific instances of the code.
+I have documented the model training process in the same order as [the notebook](./Fast-Fiction-Notebook.ipynb) - with section numbers aligning with those in the notebook. This documentation explains key details and decisions while providing relevant screenshots without getting into any of the code I used. Please refer to the notebook for specific instances of the code.
 
 ### The Results
 
