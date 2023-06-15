@@ -1,4 +1,5 @@
-# D&D NPC Generator (using an Variational Auto-Encoder)
+# Fast Fiction
+## D&D NPC Generator (using an Auto-Encoder)
 <sub> Advait Ukidve - June 2023 - MSc. Creative Computing at UAL CCI </sub>
 
 ### Two Sentence Description    
