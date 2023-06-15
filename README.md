@@ -122,7 +122,24 @@ I have documented the model training process in the same order as [the notebook]
 <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>    <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   
 <sub> Visualisations of the embedded space as a 3D scatter plot </sub>  
 
+## 4. Methods to Generate New Characters
+- Next, I defined functions to generate new characters using the reconstructed vectors.
+- The method uses individual values from the reconstructed vector's numpy array and runs them through functions that round, multiply, and/or categorise the resultant numbers and output text strings.
+- Further functions use these strings and arrange/format them to (a) Create a detailed character description for the DM, (b) Create a Stats Sheet for the generated character for easy reference, and (c) Create prompts for portrait generation using Stable Diffusion.
+- These functions are relatively straightforward and can be found in section 4.2 of the notebook.
 
+## 5. Generating Characters in Meaningful Ways
+
+#### Generating Random characters in the embedded space
+- First, we create latent vectors of shape (1,3) and randomise their elements within the scope of the embedded space by calculating the min and max values found in the latent vectors in the previously visualised latent space.
+- These are then decoded and sent through the functions created in Step 4 to create characters.
+- This method simply illustrates the project's ability to create characters that are similar to but not the same as characters from the training set.   
+
+<img src="./Images/1.png" width = 500px align = center>   
+<sub> Graph showing loss and val_loss over 500 epochs </sub>  
+
+#### Generating Characters in Between Randomly Generated Characters
+- Next we use the midpoint formula (i.e. (x1+x20/2, (y1+y2)/2, (z1+z2)/2) to find the co-ordinates of the midpoint between two of the previously generated random characters.
 
 ## Evaluating the Project
 ### Limitations of the Project
