@@ -49,15 +49,16 @@ The aims of the project were, hence, to create an NPC generator that:
 - This file contained text that I could not directly use with an autoencoder. I decided to convert the text into integer based code first (as in [this file](./Dataset_Files/DnD_Dataset_Raw_Integers.xlsx)). 
 - The integer-coding was done in accordance to a sheet called [GroundTruth](./Dataset_Files/GroundTruth.xlsx) to record the traits I wanted in my datasheet and how they would be represented in the final dataset.
 
-<img src="./Images/1.png" width = 500px>   
-<sub> Screenshot from GroundTruth to indicate the basis on which the integer coding was done </sub>  
+<img src="./Images/1.png" width = 500px align = center><sub> Screenshot from GroundTruth to indicate the basis on which the integer coding was done </sub>     
+
 
 - Then, I used the technique given on [this website](https://thatexcelsite.com/normalize-standardize-data-excel/) to standardise/normalise all the integers between 0.0 and 0.1 as floats given their respective ranges.
 - Finally, I added columns to the file beyond what was present in the original dataset that would help my project further qualify Aim 2 given above. These included columns for NPC flaws, bonds, appearance traits, etc. that the D&D Handbook advices the DM to randomise from a list of 10-20. I believe this randomness benefits the character creation process but given a dataset that already contained these columns for each character, the outcome would be better (and not completely random).
 - I recorded this in the sheet [(N)DnD_Dataset](./Dataset_Files/(N)DnD_Dataset.xlsx). This is the same file that is used in a CSV format in the final model training and a copy can hence be found in the [data](./data/dnd_dataset.csv) folder.   
 
-<img src="./Images/2.png" width = 500px>   
-<sub> Screenshot from final dataset as CSV showing normalised values used in the training to represent character traits </sub>  
+<img src="./Images/2.png" width = 1000px>   
+<sub> Screenshot from final dataset as CSV showing normalised values used in the training to represent character traits </sub>     
+
 
 ---
 
@@ -137,8 +138,8 @@ I have documented the model training process in the same order as [the notebook]
 - This method simply illustrates the project's ability to create characters that are similar to but not the same as characters from the training set.   
 - I also passed the generated descriptions through a stable diffusion model within the same notebook as an experiment but that did not yield the results I was looking for. Instead, I then passed them through Dall-E 2. The portraits displayed here are generated in Dall-E 2.
 
-<img src="./Images/13.png" width = 300px>   <img src="./Images/14.png" width = 300px>   <img src="./Images/15.png" width = 300px>   <img src="./Images/16.png" width = 300px>   
-<img src="./Images/17.png" width = 300px>   <img src="./Images/18.png" width = 300px>   
+<img src="./Images/13.png" width = 320px>   <img src="./Images/14.png" width = 320px>   <img src="./Images/15.png" width = 320px>   <img src="./Images/16.png" width = 500px>   
+<img src="./Images/17.png" width = 500px>   <img src="./Images/18.png" width = 500px>   
 <sub> Three examples of random characters generated using the AE Model </sub>  
 
 #### 5.2 Generating Characters in Between Randomly Generated Characters
@@ -146,7 +147,7 @@ I have documented the model training process in the same order as [the notebook]
 - These midpoints are passed through the decoder to create new and unique characters.
 - The three generated descriptions and portraits are two of the characters from the previously generated lineup (left and right) and their newly generated midpoint (centre).
 
-<img src="./Images/19.png" width = 300px>   <img src="./Images/20.png" width = 300px>   <img src="./Images/21.png" width = 300px>   <img src="./Images/22.png" width = 1000px>   
+<img src="./Images/19.png" width = 320px>   <img src="./Images/20.png" width = 320px>   <img src="./Images/21.png" width = 320px>   <img src="./Images/22.png" width = 1000px>   
 <sub> Generating 'midpoint' characters </sub>  
 
 #### 5.2 Generating Similar Characters
@@ -155,7 +156,7 @@ I have documented the model training process in the same order as [the notebook]
 - The bigger the range and the more disproportional it is (between x, y, and z variance), the further away the generated character will be from the original character.
 - Based on my tinkering, a range of +-0.15 from the original latent vector values gives characters that are mostly similar, which is what I was looking for. Generating using the same formula over and over again brought me characters that are similar but different enough.
 
-<img src="./Images/23.png" width = 500px>
+<img src="./Images/23.png" width = 1000px>
 <sub> (in order) The two latent vectors; lat3; lat3_likeness </sub>  
 
 #### 5.3 Generating characters with specific traits
@@ -164,7 +165,7 @@ I have documented the model training process in the same order as [the notebook]
 - Similarly, latent vectors with z-values around generated Lawful Good Characters.
 - Creating latent vectors with these x,y,z values respectively would then, in theory, generate tiefling/chaotic good characters.
 
-<img src="./Images/24.png" width = 500px>   <img src="./Images/25.png" width = 500px>
+<img src="./Images/24.png" width = 600px>   <img src="./Images/25.png" width = 400px>
 <sub> Characters with specific tiefling and chaotic good traits </sub>  
 
 - Thye obvious limitation of this technique was the change in the embedded space after every training instance. Knowing what values generate what is incidental to that training cycle and I believe fixing the problems inherent with the training data could, in the future, let me create the same embedded space and study it at scale to give definitive clusters as opposed to the above incidental variants. But I believe the technique is there and so is the opportunity.
