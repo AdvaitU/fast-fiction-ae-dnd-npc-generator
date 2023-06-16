@@ -7,7 +7,8 @@ This project uses an Auto Encoder model and a custom built dataset (built on wor
 
 #### Important Links
 - [Demonstration video](https://youtu.be/l0tCYqb48eA)
-- [Notebook containing model](./FastFiction-Notebook.ipynb)    
+- [Notebook containing model](./FastFiction-Notebook.ipynb)
+- [Link to GitHub Repository](https://github.com/AdvaitU/fast-fiction-ae-dnd-npc-generator): https://github.com/AdvaitU/fast-fiction-ae-dnd-npc-generator
 
 #### This Repo Contains:      
 - [Notebook containing model](./FasFiction-Notebook.ipynb)   
