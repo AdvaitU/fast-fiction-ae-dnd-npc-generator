@@ -91,6 +91,7 @@ I have documented the model training process in the same order as [the notebook]
 ### 2. The Model 
 
 - I chose to use an auto-encoder for the purpose. The auto-encoder is built using a separate encoder and decoder trained together.
+- The model was based on the [VAE Notebook](https://git.arts.ac.uk/rfiebrink/ExploringMachineIntelligence_Spring2023/blob/main/week4/ConvolutionalVAE.ipynb) we explored in class in Week 4
 - Both the Encoder and Decoder 9-10 connected layers with the majority being fully connected dense layers and an Input, BatchNormalisation and RELU Activation layer each.
 - The encoder takes the shape (n,31) as an input and passes it through increasingly smaller layers 3x(n,31), 2x(n,15), 2x(n,7), 1x(n,3). The decoder works in the exact opposite fashion.
 - The latent vector is of the shape (n,3) having 3 dimensions which make it easy to visualise the embedded space. I also tried reducing the dimensionality to 1, 2, and 4 but had similar results in terms of loss.
@@ -134,12 +135,38 @@ I have documented the model training process in the same order as [the notebook]
 - First, we create latent vectors of shape (1,3) and randomise their elements within the scope of the embedded space by calculating the min and max values found in the latent vectors in the previously visualised latent space.
 - These are then decoded and sent through the functions created in Step 4 to create characters.
 - This method simply illustrates the project's ability to create characters that are similar to but not the same as characters from the training set.   
+- I also passed the generated descriptions through a stable diffusion model within the same notebook as an experiment but that did not yield the results I was looking for. Instead, I then passed them through Dall-E 2. The portraits displayed here are generated in Dall-E 2.
 
-<img src="./Images/1.png" width = 500px align = center>   
-<sub> Graph showing loss and val_loss over 500 epochs </sub>  
+<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 1000px>   
+<sub> Three examples of random characters generated using the AE Model </sub>  
 
 #### Generating Characters in Between Randomly Generated Characters
 - Next we use the midpoint formula (i.e. (x1+x20/2, (y1+y2)/2, (z1+z2)/2) to find the co-ordinates of the midpoint between two of the previously generated random characters.
+- These midpoints are passed through the decoder to create new and unique characters.
+- The three generated descriptions and portraits are two of the characters from the previously generated lineup (left and right) and their newly generated midpoint (centre).
+
+<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 1000px>   
+<sub> Generating 'midpoint' characters </sub>  
+
+#### Generating Similar Characters
+- Next, we generate characters in a similar mould as previously generated characters. To do this, we can look at the latent vector of a character we like but are not entirely happy with.
+- Then, we create another latent vector by adding random variation to its x,y, and z co-ordinates within a pre-defined range.
+- The bigger the range and the more disproportional it is (between x, y, and z variance), the further away the generated character will be from the original character.
+- Based on my tinkering, a range of +-0.15 from the original latent vector values gives characters that are mostly similar, which is what I was looking for. Generating using the same formula over and over again brought me characters that are similar but different enough.
+
+<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 1000px>   
+<sub> Characters with specific tiefling and chaotic good traits </sub>  
+
+#### Generating characters with specific traits
+- Finally, we generate characters with predecided traits as was one of the main aims of the project.
+- After playing around with the latest generated embedded space, I could verifieably say that the characters with latent vectors x-values around and y-values around generated characters of the race tiefling.
+- Similarly, latent vectors with z-values around generated Lawful Good Characters.
+- Creating latent vectors with these x,y,z values respectively would then, in theory, generate tiefling/chaotic good characters.
+
+<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 1000px>   
+<sub> Characters with specific tiefling and chaotic good traits </sub>  
+
+- Thye obvious limitation of this technique was the change in the embedded space after every training instance. Knowing what values generate what is incidental to that training cycle and I believe fixing the problems inherent with the training data could, in the future, let me create the same embedded space and study it at scale to give definitive clusters as opposed to the above incidental variants. But I believe the technique is there and so is the opportunity.
 
 ## Evaluating the Project
 ### Limitations of the Project
