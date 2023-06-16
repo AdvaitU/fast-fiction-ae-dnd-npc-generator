@@ -147,7 +147,6 @@ I have documented the model training process in the same order as [the notebook]
 - The three generated descriptions and portraits are two of the characters from the previously generated lineup (left and right) and their newly generated midpoint (centre).
 
 <img src="./Images/19.png" width = 300px>   <img src="./Images/20.png" width = 300px>   <img src="./Images/21.png" width = 300px>   <img src="./Images/22.png" width = 1000px>   
-<img src="./Images/23.png" width = 1000px>    <img src="./Images/24.png" width = 1000px>   
 <sub> Generating 'midpoint' characters </sub>  
 
 #### 5.2 Generating Similar Characters
@@ -156,7 +155,7 @@ I have documented the model training process in the same order as [the notebook]
 - The bigger the range and the more disproportional it is (between x, y, and z variance), the further away the generated character will be from the original character.
 - Based on my tinkering, a range of +-0.15 from the original latent vector values gives characters that are mostly similar, which is what I was looking for. Generating using the same formula over and over again brought me characters that are similar but different enough.
 
-<img src="./Images/25.png" width = 500px>  <img src="./Images/26.png" width = 500px>   <img src="./Images/27.png" width = 500px>   
+<img src="./Images/23.png" width = 500px>
 <sub> (in order) The two latent vectors; lat3; lat3_likeness </sub>  
 
 #### 5.3 Generating characters with specific traits
@@ -165,7 +164,7 @@ I have documented the model training process in the same order as [the notebook]
 - Similarly, latent vectors with z-values around generated Lawful Good Characters.
 - Creating latent vectors with these x,y,z values respectively would then, in theory, generate tiefling/chaotic good characters.
 
-<img src="./Images/28.png" width = 500px>   <img src="./Images/29.png" width = 500px>   <img src="./Images/30.png" width = 500px>   <img src="./Images/31.png" width = 1000px>   
+<img src="./Images/24.png" width = 500px>   <img src="./Images/25.png" width = 500px>
 <sub> Characters with specific tiefling and chaotic good traits </sub>  
 
 - Thye obvious limitation of this technique was the change in the embedded space after every training instance. Knowing what values generate what is incidental to that training cycle and I believe fixing the problems inherent with the training data could, in the future, let me create the same embedded space and study it at scale to give definitive clusters as opposed to the above incidental variants. But I believe the technique is there and so is the opportunity.
