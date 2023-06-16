@@ -130,6 +130,8 @@ I have documented the model training process in the same order as [the notebook]
 - Further functions use these strings and arrange/format them to (a) Create a detailed character description for the DM, (b) Create a Stats Sheet for the generated character for easy reference, and (c) Create prompts for portrait generation using Stable Diffusion.
 - These functions are relatively straightforward and can be found in section 4.2 of the notebook.
 
+---
+
 ## 5. Generating Characters in Meaningful Ways
 
 #### Generating Random characters in the embedded space
