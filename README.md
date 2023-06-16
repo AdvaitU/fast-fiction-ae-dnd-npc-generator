@@ -6,15 +6,16 @@
 This project uses an Auto Encoder model and a custom built dataset (built on work listed further in the Readme) of human-created Dungeons and Dragons characters to create an NPC (Non-Playable Character) generator to be used by Dungeons and Dragons DMs in a pinch. The generator allows for generation of charcters by using the embedded space of 3 Dimensional latent vectors in interesting ways.
 
 #### Important Links
-- Demonstration video:
-- Notebook containing model:     
+- [Demonstration video](https://youtu.be/l0tCYqb48eA)
+- [Notebook containing model](./FasFiction-Notebook.ipynb)    
 
-
-#### Other Links         
-- Link to original Dataset:
-- Custom created Dataset:
-- Ground Truth Sheet:
-- Normalised Dataset Used in Model:
+#### This Repo Contains:      
+- [Notebook containing model](./FasFiction-Notebook.ipynb)   
+- [Dataset used for training](./data/dnd_dataset.csv)
+- Models saved as JSONs
+- Weights saved as H5s
+- Legible [Excel Sheets](./Dataset_Files/) referenced in the Process Documentation
+- [Images used in this Readme](./Images/)
 
 # Project and Process Documentation
 
