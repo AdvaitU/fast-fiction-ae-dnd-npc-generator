@@ -7,7 +7,7 @@ This project uses an Auto Encoder model and a custom built dataset (built on wor
 
 #### Important Links
 - [Demonstration video](https://youtu.be/l0tCYqb48eA)
-- [Notebook containing model](./FasFiction-Notebook.ipynb)    
+- [Notebook containing model](./FastFiction-Notebook.ipynb)    
 
 #### This Repo Contains:      
 - [Notebook containing model](./FasFiction-Notebook.ipynb)   
