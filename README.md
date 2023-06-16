@@ -56,7 +56,7 @@ The aims of the project were, hence, to create an NPC generator that:
 - Finally, I added columns to the file beyond what was present in the original dataset that would help my project further qualify Aim 2 given above. These included columns for NPC flaws, bonds, appearance traits, etc. that the D&D Handbook advices the DM to randomise from a list of 10-20. I believe this randomness benefits the character creation process but given a dataset that already contained these columns for each character, the outcome would be better (and not completely random).
 - I recorded this in the sheet [(N)DnD_Dataset](./Dataset_Files/(N)DnD_Dataset.xlsx). This is the same file that is used in a CSV format in the final model training and a copy can hence be found in the [data](./data/dnd_dataset.csv) folder.   
 
-<img src="./Images/1.png" width = 500px>   
+<img src="./Images/2.png" width = 500px>   
 <sub> Screenshot from final dataset as CSV showing normalised values used in the training to represent character traits </sub>  
 
 ---
@@ -96,7 +96,7 @@ I have documented the model training process in the same order as [the notebook]
 - The encoder takes the shape (n,31) as an input and passes it through increasingly smaller layers 3x(n,31), 2x(n,15), 2x(n,7), 1x(n,3). The decoder works in the exact opposite fashion.
 - The latent vector is of the shape (n,3) having 3 dimensions which make it easy to visualise the embedded space. I also tried reducing the dimensionality to 1, 2, and 4 but had similar results in terms of loss.
 
-<img src="./Images/1.png" width = 1000px>   
+<img src="./Images/3.png" width = 1000px>   
 <sub> Diagram of the Autoencoder model (Representational) </sub>  
 
 - The model uses the optimiser 'adam'. I tried using multiple optimisers but 'adam' proved to be the most reliable.
@@ -107,20 +107,20 @@ I have documented the model training process in the same order as [the notebook]
 
 - The model performed pretty well during the training with the loss consistently below 0.1.
 
-<img src="./Images/1.png" width = 500px align = center>   
+<img src="./Images/4.png" width = 500px align = center>   
 <sub> Graph showing loss and val_loss over 500 epochs </sub>  
 
 - In order to evaluate the model further, I ran the test data through the aut-encoder and plotted the original and reconstructed vectors in a line graph.
 - The reconstructed vectors weren't very accurate but followed the general pattern of the original vectors.   
 
-<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   
+<img src="./Images/5.png" width = 500px>   <img src="./Images/6.png" width = 500px>   
 <sub> Line Diagrams showing the original vectors and reconstructed vectors from (left) the training set and (right) the testing set </sub>  
 
 - Next, I plotted the embedded space by creating a 3D scatter diagram of the latent vectors created by encoding the training set. (Thanks to [this tutorial](https://www.geeksforgeeks.org/3d-scatter-plotting-in-python-using-matplotlib/ for teaching me how to do 3D scatter Plots with Matplotlib))
 - Here, I first encountered the problem with this project I explain in detail at the end - that every time the model trained, it trained differently - often losing accuracy in reconstructing specific columns of data.
 - Here is an array of interesting looking but indicative 3D scatters I got after training the model multiple times:   
 
-<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>    <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   
+<img src="./Images/7.png" width = 500px>   <img src="./Images/8.png" width = 500px>    <img src="./Images/9.png" width = 500px>   <img src="./Images/10.png" width = 500px>   <img src="./Images/11.png" width = 500px>   <img src="./Images/12.png" width = 500px>   
 <sub> Visualisations of the embedded space as a 3D scatter plot </sub>  
 
 ## 4. Methods to Generate New Characters
@@ -137,37 +137,56 @@ I have documented the model training process in the same order as [the notebook]
 - This method simply illustrates the project's ability to create characters that are similar to but not the same as characters from the training set.   
 - I also passed the generated descriptions through a stable diffusion model within the same notebook as an experiment but that did not yield the results I was looking for. Instead, I then passed them through Dall-E 2. The portraits displayed here are generated in Dall-E 2.
 
-<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 1000px>   
+<img src="./Images/13.png" width = 300px>   <img src="./Images/14.png" width = 300px>   <img src="./Images/15.png" width = 300px>   <img src="./Images/16.png" width = 300px>   
+<img src="./Images/17.png" width = 300px>   <img src="./Images/18.png" width = 300px>   
 <sub> Three examples of random characters generated using the AE Model </sub>  
 
-#### Generating Characters in Between Randomly Generated Characters
+#### 5.2 Generating Characters in Between Randomly Generated Characters
 - Next we use the midpoint formula (i.e. (x1+x20/2, (y1+y2)/2, (z1+z2)/2) to find the co-ordinates of the midpoint between two of the previously generated random characters.
 - These midpoints are passed through the decoder to create new and unique characters.
 - The three generated descriptions and portraits are two of the characters from the previously generated lineup (left and right) and their newly generated midpoint (centre).
 
-<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 1000px>   
+<img src="./Images/19.png" width = 300px>   <img src="./Images/20.png" width = 300px>   <img src="./Images/21.png" width = 300px>   <img src="./Images/22.png" width = 1000px>   
+<img src="./Images/23.png" width = 1000px>    <img src="./Images/24.png" width = 1000px>   
 <sub> Generating 'midpoint' characters </sub>  
 
-#### Generating Similar Characters
+#### 5.2 Generating Similar Characters
 - Next, we generate characters in a similar mould as previously generated characters. To do this, we can look at the latent vector of a character we like but are not entirely happy with.
 - Then, we create another latent vector by adding random variation to its x,y, and z co-ordinates within a pre-defined range.
 - The bigger the range and the more disproportional it is (between x, y, and z variance), the further away the generated character will be from the original character.
 - Based on my tinkering, a range of +-0.15 from the original latent vector values gives characters that are mostly similar, which is what I was looking for. Generating using the same formula over and over again brought me characters that are similar but different enough.
 
-<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 1000px>   
-<sub> Characters with specific tiefling and chaotic good traits </sub>  
+<img src="./Images/25.png" width = 500px>  <img src="./Images/26.png" width = 500px>   <img src="./Images/27.png" width = 500px>   
+<sub> (in order) The two latent vectors; lat3; lat3_likeness </sub>  
 
-#### Generating characters with specific traits
+#### 5.3 Generating characters with specific traits
 - Finally, we generate characters with predecided traits as was one of the main aims of the project.
 - After playing around with the latest generated embedded space, I could verifieably say that the characters with latent vectors x-values around and y-values around generated characters of the race tiefling.
 - Similarly, latent vectors with z-values around generated Lawful Good Characters.
 - Creating latent vectors with these x,y,z values respectively would then, in theory, generate tiefling/chaotic good characters.
 
-<img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 500px>   <img src="./Images/1.png" width = 1000px>   
+<img src="./Images/28.png" width = 500px>   <img src="./Images/29.png" width = 500px>   <img src="./Images/30.png" width = 500px>   <img src="./Images/31.png" width = 1000px>   
 <sub> Characters with specific tiefling and chaotic good traits </sub>  
 
 - Thye obvious limitation of this technique was the change in the embedded space after every training instance. Knowing what values generate what is incidental to that training cycle and I believe fixing the problems inherent with the training data could, in the future, let me create the same embedded space and study it at scale to give definitive clusters as opposed to the above incidental variants. But I believe the technique is there and so is the opportunity.
 
-## Evaluating the Project
+## 5.4 Evaluating the Project
+
 ### Limitations of the Project
-### Future Scope
+- The major limitation of the project in its current form is how it is training creates a different embedded space every time it is run. 
+- The techniques to extract the necessary information in multiple ways and varying aims work well but are contingent on the embedded space being a useful model. This limitation exists because of the way the dataset is constructed, ultimately, with some attributes missing obvious patterns while other being a result of accurate data being unavailable. 
+- The hypothesis is that with a well constructed dataset, the model would relibly train to create similar embedded spaces that the techniques in 4. and 5. can be used on to deliver the intended aim of the project.   
+- Another major limitation for the project was in how the data set was built. One-hot encoding could have proved to be more useful than the integer based encoding I tried while constructing large scope traits. 
+- Additionally, the lack of necessary data for some of the traits I desired the model to generate meant I had to resort to generating these traits for the existing characters at random. While randomness does allow for some novel creations, it does not truly support the spirit of this project and I would hope to create a dataset that also captures these additional features in order to build a better model in the future.
+
+### Reflection
+- Ignoring the limitations, my hypothesis that I could use an auto-encoder to generate numerical (and hence textual) data to create unique D&D characters proved to be right. 
+- It also built confidence in the ability to use the embedded space created by such an AE model meaningfully to create characters along the lines of what we desire and have the model fill out the additional details required to create a game-ready NPC meaning human effort can be spent more meaningfully in creating further developing these characters and bringing them to life in a D&D campaign than on mundane data entry. 
+- I believe a transformer could also create great D&D NPCs given the right training set although this would potentially be at the cost of being able to customise them as well as one can with the latent space. Of course, it is possible to create an OpenAI like transformer that makes up for this deficiency too, but I don't believe D&D Character Creation to warrant the spending of energy, resources, and wealth at that scale xD
+
+
+
+
+
+
+
