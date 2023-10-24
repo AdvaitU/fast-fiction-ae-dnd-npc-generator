@@ -119,7 +119,7 @@ I have documented the model training process in the same order as [the notebook]
 <img src="./Images/5.png" width = 500px>   <img src="./Images/6.png" width = 500px>   
 <sub> Line Diagrams showing the original vectors and reconstructed vectors from (left) the training set and (right) the testing set </sub>  
 
-- Next, I plotted the embedded space by creating a 3D scatter diagram of the latent vectors created by encoding the training set. (Thanks to [this tutorial](https://www.geeksforgeeks.org/3d-scatter-plotting-in-python-using-matplotlib/ for teaching me how to do 3D scatter Plots with Matplotlib))
+- Next, I plotted the embedded space by creating a 3D scatter diagram of the latent vectors created by encoding the training set. (Thanks to [this tutorial](https://www.geeksforgeeks.org/3d-scatter-plotting-in-python-using-matplotlib/) for teaching me how to do 3D scatter Plots with Matplotlib))
 - Here, I first encountered the problem with this project I explain in detail at the end - that every time the model trained, it trained differently - often losing accuracy in reconstructing specific columns of data.
 - Here is an array of interesting looking but indicative 3D scatters I got after training the model multiple times:   
 
